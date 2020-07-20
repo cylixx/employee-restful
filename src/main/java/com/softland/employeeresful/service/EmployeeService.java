@@ -2,30 +2,26 @@ package com.softland.employeeresful.service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.softland.employeeresful.repository.EmployeeRepository;
 import com.softland.employeeresful.vo.Employee;
 
 @Service
 public class EmployeeService {
-	private static List<Employee> employees;
-	private static int id = 0;
 	
-	static {
-		employees = Arrays.asList(
-				new Employee(++id, "Marco Hinojosa", "Bank Payments"),
-				new Employee(++id, "Selene Lopez", "SAP"),
-				new Employee(++id, "Kumar Rabin", "Cards"),
-				new Employee(++id, "Salma Hayek", "Publicity")
-				);
-	}
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	public List<Employee> getAllEmployee() {
-		return employees;
+		return employeeRepository.findAll();
 	}
 	
 	public Employee getEmployee(int id) {
-		return employees.get(id - 1);
+		Optional<Employee> emp = employeeRepository.findById(id);
+		return emp.orElse(null);
 	}
 }

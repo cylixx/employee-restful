@@ -1,6 +1,13 @@
 package com.softland.employeeresful.vo;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Employee {
+	@Id
+	@GeneratedValue
 	private int id;
 	private String name;
 	private String department;
@@ -9,6 +16,11 @@ public class Employee {
 		super();
 	}
 
+	public Employee(String name, String department) {
+		super();
+		this.name = name;
+		this.department = department;
+	}
 	public Employee(int id, String name, String department) {
 		super();
 		this.id = id;
@@ -20,24 +32,12 @@ public class Employee {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getDepartment() {
 		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
 	}
 
 	@Override

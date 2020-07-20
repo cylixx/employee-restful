@@ -10,7 +10,7 @@ import com.softland.employeeresful.vo.Employee;
 @Service
 public class EmployeeMockService {
 	private static List<Employee> employees;
-	private static int id = 0;
+	private static Long id = 0l;
 	
 	static {
 		employees = Arrays.asList(

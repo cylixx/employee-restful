@@ -5,10 +5,8 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,17 +22,20 @@ public class ConsumeWebServiceController {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	/*
+	 * Using RestTemplate invoke another URL and update a entity
+	 */
 	@RequestMapping(value = "/template/employee/{id}", method = RequestMethod.PUT)
-	public String updateEmployee(@PathVariable long id, @RequestBody Employee employee) {
+	public ResponseEntity<Employee> updateEmployee(@PathVariable long id, @RequestBody Employee employee) {
 		if(employee.getId() == null) employee.setId(id);
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		HttpEntity<Employee> entity = new HttpEntity<Employee>(employee, headers);
 
-		return restTemplate.exchange("http://localhost:8080/employee/", HttpMethod.POST, entity, String.class)
-				.getBody();
-
+//		return restTemplate.exchange("http://localhost:8080/employee/", HttpMethod.POST, entity, String.class)
+//				.getBody();
+		return restTemplate.postForEntity("http://localhost:8080/employee/", entity, Employee.class);
 	}
 	
 }

@@ -40,6 +40,18 @@ public class Employee {
 		return department;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Employee [id=%s, name=%s, department=%s]", id, name, department);

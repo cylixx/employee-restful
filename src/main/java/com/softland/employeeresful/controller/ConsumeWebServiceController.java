@@ -7,6 +7,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.softland.employeeresful.vo.Employee;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class ConsumeWebServiceController {
 
@@ -25,7 +27,7 @@ public class ConsumeWebServiceController {
 	/*
 	 * Using RestTemplate invoke another URL and update a entity
 	 */
-	@RequestMapping(value = "/template/employee/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/admin/employee/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Employee> updateEmployee(@PathVariable long id, @RequestBody Employee employee) {
 		if(employee.getId() == null) employee.setId(id);
 		
